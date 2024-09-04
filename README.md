@@ -36,7 +36,7 @@ La aplicación muestra cómo conectar ambas partes para fines de desarrollo prof
 
 Este proyecto ilustra la integración entre el front-end y el back-end, mostrando cómo se puede construir una aplicación completa con comunicación efectiva entre sus partes.
 
-## IMG demostracion que funcione 
+## IMG Demostracion que funciono :D 
 
 ![Pruebas](https://github.com/user-attachments/assets/2c3d7f7d-a1ef-4d45-8876-453a4f5d04cb)
 
