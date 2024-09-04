@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Archivos de entorno
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Otros
+.DS_Store
+*.pem
+*.log
+*.tmp
+*.swp
+
+# Directorios de compilación
+dist/
+build/
+
+# Archivos de IDE
+.vscode/
+.idea/
+
+# Archivos específicos de sistemas operativos
+Thumbs.db
+Desktop.ini
