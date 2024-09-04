@@ -13,10 +13,10 @@ export async function getTodosByID(id) {
   try {
     const [rows] = await pool.query(
       `
-      SELECT todos.*, shared_todos.shared_with_id
+      SELECT todos.*, todos_shared.todos_shared_id
       FROM todos
-      LEFT JOIN shared_todos ON todos.id = shared_todos.todo_id
-      WHERE todos.user_id = ? OR shared_todos.shared_with_id = ?
+      LEFT JOIN todos_shared ON todos.id = todos_shared.todo_id
+      WHERE todos.user_id = ? OR todos_shared.todos_shared_id = ?
     `,
       [id, id]
     );
