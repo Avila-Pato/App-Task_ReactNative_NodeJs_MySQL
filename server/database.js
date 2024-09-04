@@ -7,18 +7,20 @@ const pool = mysql.createPool({
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
+  charset: 'utf8mb4'  // Asegúrate de incluir esta opción
 }).promise();
+
 
 export async function getTodosByID(id) {
   try {
     const [rows] = await pool.query(
       `
-      SELECT todos.*, todos_shared.todos_shared_id
+      SELECT todos.*, todos_shared.user_id AS shared_with_user_id
       FROM todos
       LEFT JOIN todos_shared ON todos.id = todos_shared.todo_id
       WHERE todos.user_id = ? OR todos_shared.todos_shared_id = ?
     `,
-      [id, id]
+      [id, id]  // Parámetros para reemplazar los placeholders ?
     );
     return rows;
   } catch (error) {
@@ -29,7 +31,6 @@ export async function getTodosByID(id) {
 
 export async function getTodo(id) {
   try {
-        // la centencia ?`, [id] evita ataques de inyeccion de sql
     const [rows] = await pool.query('SELECT * FROM todos WHERE id = ?', [id]);
     return rows[0];
   } catch (error) {
@@ -40,8 +41,8 @@ export async function getTodo(id) {
 
 export async function getSharedTodoByID(id) {
   try {
-    const [rows] = await pool.query('SELECT * FROM shared_todos WHERE todo_id = ?', [id]);
-    return rows[0];
+    const [rows] = await pool.query('SELECT * FROM todos_shared WHERE todo_id = ?', [id]);
+    return rows;
   } catch (error) {
     console.error('Error getting shared todo by ID:', error);
     throw error;
@@ -117,7 +118,7 @@ export async function shareTodo(todo_id, user_id, shared_with_id) {
   try {
     const [result] = await pool.query(
       `
-      INSERT INTO shared_todos (todo_id, user_id, shared_with_id) 
+      INSERT INTO todos_shared (todo_id, user_id, todos_shared_id) 
       VALUES (?, ?, ?);
     `,
       [todo_id, user_id, shared_with_id]
