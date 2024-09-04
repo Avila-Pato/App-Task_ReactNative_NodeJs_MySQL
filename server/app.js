@@ -22,7 +22,7 @@ const app = express();
 // Con esta configuración, tu servidor Express permitirá solicitudes desde el origen especificado (http://localhost:3000), 
 //aceptará los métodos HTTP listados, y permitirá los encabezados y credenciales configurados.
 const corsOption = {
-    origin: 'http://localhost:3000', // espedicificar la URL de la aplicación 
+    origin: 'http://localhost:8081', // espedicificar la URL de la aplicación 
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // métodos HTTP permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // encabezados permitidos
     credentials: true, // habilitar el envío de cookies y encabezados de autenticación por la api
